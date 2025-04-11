@@ -41,7 +41,7 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --animate-grid: grid 15s linear infinite;
+  --animate-grid: grid 15s cubic-bezier(0.5, 0.62, 0.75, 1) infinite;
   @keyframes grid {
   0% {
     transform: translateY(-50%);
@@ -129,3 +129,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
