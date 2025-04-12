@@ -59,7 +59,7 @@ export function RetroGrid({
       style={gridStyles}
       {...props}
     >
-      <div className="absolute inset-0  [transform:rotateY(var(--grid-angle))]">
+      <div className="absolute inset-0 stroke-black [transform:rotateY(var(--grid-angle))]">
         <div
           className={cn(
             "animate-grid",
