@@ -75,7 +75,7 @@ export function RetroGrid({
         />
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-r from-[#AD49E1] to-transparent to-100% dark:from-black" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#413F42] to-transparent to-100% dark:from-black" />
     </div>
   );
 }
