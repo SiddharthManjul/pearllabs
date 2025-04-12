@@ -1,7 +1,7 @@
-import  HeroSection  from "@/components/custom/hero-section";
+import HeroGrid from "@/components/custom/hero-grid"
 
 export default function Home() {
   return (
-    <HeroSection />
+    <HeroGrid />
   )
 }

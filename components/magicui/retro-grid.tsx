@@ -1,151 +1,81 @@
-"use client";
-
 import { cn } from "@/lib/utils";
-import { useEffect, useRef } from "react";
 
-interface RetroWormholeProps extends React.HTMLAttributes<HTMLDivElement> {
+interface RetroGridProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Additional CSS classes to apply to the wormhole container
+   * Additional CSS classes to apply to the grid container
    */
   className?: string;
   /**
-   * Number of circles in the wormhole
-   * @default 12
+   * Rotation angle of the grid in degrees
+   * @default 65
    */
-  circleCount?: number;
+  angle?: number;
   /**
-   * Animation speed for the wormhole effect (seconds)
-   * @default 10
+   * Grid cell size in pixels
+   * @default 60
    */
-  animationSpeed?: number;
+  cellSize?: number;
   /**
-   * Opacity value between 0 and 1
-   * @default 0.7
+   * Grid opacity value between 0 and 1
+   * @default 0.5
    */
   opacity?: number;
   /**
    * Grid line color in light mode
-   * @default "#555555"
+   * @default "gray"
    */
   lightLineColor?: string;
   /**
    * Grid line color in dark mode
-   * @default "#888888"
+   * @default "gray"
    */
   darkLineColor?: string;
-  /**
-   * Number of segments in each circle
-   * @default 12
-   */
-  segments?: number;
 }
 
 export function RetroGrid({
   className,
-  circleCount = 12,
-  animationSpeed = 10,
-  opacity = 0.7,
-  lightLineColor = "#555555",
-  darkLineColor = "#888888",
-  segments = 12,
+  angle = 65,
+  cellSize = 60,
+  opacity = 0.5,
+  lightLineColor = "gray",
+  darkLineColor = "gray",
   ...props
-}: RetroWormholeProps) {
-  const wormholeRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Create keyframe animation dynamically
-    const styleSheet = document.createElement("style");
-    styleSheet.textContent = `
-      @keyframes wormhole-rotation {
-        0% { transform: translate(-50%, -50%) rotate(0deg); }
-        100% { transform: translate(-50%, -50%) rotate(360deg); }
-      }
-      
-      @keyframes wormhole-pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
-      }
-    `;
-    document.head.appendChild(styleSheet);
-
-    return () => {
-      document.head.removeChild(styleSheet);
-    };
-  }, []);
-
-  // Create an array of circles to render
-  const circles = Array.from({ length: circleCount }, (_, i) => {
-    const baseSize = 100 - (i * (70 / circleCount)); // Gradually decreasing size
-    const delay = i * (animationSpeed / circleCount);
-    
-    return (
-      <div 
-        key={i}
-        className="absolute left-1/2 top-1/2 border rounded-full"
-        style={{
-          width: `${baseSize}%`,
-          height: `${baseSize}%`,
-          transform: "translate(-50%, -50%)",
-          borderColor: "var(--line-color)",
-          opacity: opacity * (1 - i / (circleCount * 1.5)),
-          animation: `wormhole-rotation ${animationSpeed}s linear infinite`,
-          animationDelay: `-${delay}s`,
-          zIndex: circleCount - i
-        }}
-      >
-        {/* Generate radial segments for each circle */}
-        {Array.from({ length: segments }, (_, j) => {
-          const angle = (j / segments) * 360;
-          return (
-            <div
-              key={j}
-              className="absolute top-1/2 left-1/2 border-t"
-              style={{
-                width: "50%",
-                transform: `translate(0, -50%) rotate(${angle}deg)`,
-                transformOrigin: "left center",
-                borderColor: "var(--line-color)",
-              }}
-            />
-          );
-        })}
-      </div>
-    );
-  });
+}: RetroGridProps) {
+  const gridStyles = {
+    "--grid-angle": `${angle}deg`,
+    "--cell-size": `${cellSize}px`,
+    "--opacity": opacity,
+    "--light-line": lightLineColor,
+    "--dark-line": darkLineColor,
+  } as React.CSSProperties;
 
   return (
     <div
       className={cn(
-        "fixed inset-0 w-full h-full overflow-hidden",
-        className
+        "pointer-events-none absolute size-full overflow-hidden [perspective:200px]",
+        `opacity-[var(--opacity)]`,
+        className,
       )}
-      style={{
-        "--light-line": lightLineColor,
-        "--dark-line": darkLineColor,
-        "--line-color": "var(--light-line)",
-      } as React.CSSProperties}
+      style={gridStyles}
       {...props}
     >
-      {/* Wormhole container */}
-      <div 
-        ref={wormholeRef}
-        className={cn(
-          "absolute inset-0 w-full h-full [perspective:1000px]",
-          "dark:[--line-color:var(--dark-line)]"
-        )}
-        style={{
-          animation: `wormhole-pulse ${animationSpeed * 1.5}s ease-in-out infinite`
-        }}
-      >
-        {circles}
+      <div className="absolute inset-0  [transform:rotateY(var(--grid-angle))]">
+        <div
+          className={cn(
+            "animate-grid",
+
+            "[background-repeat:repeat] [background-size:60px_60px] [height:300vh] [inset:0%_0px] [margin-left:-50%] [transform-origin:100%_0_0] [width:600vw]",
+
+            // Light Styles
+            "[background-image:linear-gradient(to_right,rgba(0,0,0,0.3)_1px,transparent_0),linear-gradient(to_bottom,rgba(0,0,0,0.3)_1px,transparent_0)]",
+
+            // Dark styles
+            "dark:[background-image:linear-gradient(to_right,rgba(255,255,255,0.2)_1px,transparent_0),linear-gradient(to_bottom,rgba(255,255,255,0.2)_1px,transparent_0)]",
+          )}
+        />
       </div>
-      
-      {/* Central glow */}
-      <div className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/30 blur-lg" />
-      
-      {/* Radial gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#3C4048] dark:to-black opacity-70" />
+
+      <div className="absolute inset-0 bg-gradient-to-r from-[#AD49E1] to-transparent to-100% dark:from-black" />
     </div>
   );
 }
