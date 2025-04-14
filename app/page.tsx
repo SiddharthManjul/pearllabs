@@ -2,6 +2,11 @@ import { RetroGrid } from "@/components/magicui/retro-grid";
 import { CustomOrbit } from "@/components/custom/custom-orbit";
 import { File, Settings } from "lucide-react";
 
+import { Montserrat, Space_Grotesk } from "next/font/google";
+
+const montserrat = Montserrat({ subsets: ["latin"] });
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" });
+
 export default function Home() {
   return (
     <div className="relative h-screen w-full overflow-hidden">
@@ -11,7 +16,7 @@ export default function Home() {
       <div className="relative z-10 flex h-full w-full items-center">
         {/* Left side content */}
         <div className="pl-20 pb-40 w-full">
-          <h1 className="text-4xl font-bold">PEARL Labs</h1>
+          <h1 className={`text-4xl font-bold ${spaceGrotesk.className}`}>PEARL Labs</h1>
           <p className="mt-4 text-lg">
             Ekdum mast tagline dene ka, ye baburao ka style h. Paisa he paisa
             hoga, hehehe!
