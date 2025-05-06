@@ -1,0 +1,108 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+    position: relative;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  
+  .logoSymbol {
+    color: var(--accent);
+    margin-right: 0.25rem;
+  }
+  
+  .navLinks {
+    display: flex;
+    gap: 2.5rem;
+  }
+  
+  .navLink {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .navLink:hover {
+    color: var(--accent);
+  }
+  
+  .menuButton {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .menuIcon {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--text-light);
+    position: relative;
+    transition: background-color 0.3s ease;
+  }
+  
+  .menuIcon::before,
+  .menuIcon::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background-color: var(--text-light);
+    transition: transform 0.3s ease;
+  }
+  
+  .menuIcon::before {
+    top: -8px;
+  }
+  
+  .menuIcon::after {
+    bottom: -8px;
+  }
+  
+  @media (max-width: 768px) {
+    .menuButton {
+      display: block;
+      z-index: 100;
+    }
+    
+    .navLinks {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 70%;
+      height: 100vh;
+      background-color: var(--primary-dark);
+      flex-direction: column;
+      padding: 6rem 2rem 2rem;
+      transition: right 0.3s ease;
+      z-index: 90;
+    }
+    
+    .navLinks.active {
+      right: 0;
+    }
+    
+    .menuButton.active .menuIcon {
+      background-color: transparent;
+    }
+    
+    .menuButton.active .menuIcon::before {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .menuButton.active .menuIcon::after {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+  }

@@ -1,26 +1,29 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import { Space_Grotesk } from "next/font/google";
 
-import { Montserrat, Space_Grotesk } from "next/font/google";
-
-const montserrat = Montserrat({ subsets: ["latin"] });
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const spaceGrotesk = Space_Grotesk({subsets: ["latin"] });
-
+import './globals.css';
+import Navbar from '../components/navbar';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "P.E.A.R.L. Labs",
-  description: "A place for all your P.E.A.R.L. needs",
+  title: 'PEARL LABS - Cryptography fuels the next Internet',
+  description: 'Research team working in Blockchain, AI and Cryptography',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface RootLayoutProps {
   children: React.ReactNode;
-}>) {
+}
+
+export default function RootLayout({ children }: RootLayoutProps): React.ReactElement {
   return (
     <html lang="en">
-      <body className={montserrat.className}>{children}</body>
+      <body className={spaceGrotesk.className}>
+        <div className="container">
+          <Navbar />
+          {children}
+        </div>
+      </body>
     </html>
   );
 }

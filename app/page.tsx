@@ -1,16 +1,10 @@
-import HeroGrid from "../components/custom/hero-grid";
+import HeroSection from '../components/custom/hero-grid';
+import React from 'react';
 
-import { Space_Grotesk } from "next/font/google";
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
-});
-
-export default function Home() {
+export default function Home(): React.ReactElement {
   return (
-    <div className="">
-      <HeroGrid />
-    </div>
+    <main>
+      <HeroSection />
+    </main>
   );
 }
