@@ -4,6 +4,7 @@ import "./globals.css";
 import { Montserrat, Space_Grotesk } from "next/font/google";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const spaceGrotesk = Space_Grotesk({subsets: ["latin"] });
 
 
