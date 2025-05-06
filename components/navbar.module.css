@@ -2,8 +2,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem 0;
+    padding: 1rem 1rem;
     position: relative;
+    background-color: #441752;
+    border-radius: 1rem;
   }
   
   .logo {

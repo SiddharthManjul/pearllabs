@@ -173,7 +173,7 @@
 }
 
 body {
-  background-color: var(--primary-dark);
+  background-color: #441752;
   color: var(--text-light);
   min-height: 100vh;
   overflow-x: hidden;
@@ -183,7 +183,7 @@ body {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 1rem 2rem;
 }
 
 /* Hero Section Styles */
@@ -193,6 +193,8 @@ body {
   min-height: calc(100vh - 100px);
   position: relative;
   overflow: hidden;
+  padding-left: 10px;
+  border-radius: 1rem;
 }
 
 .hero-content {
@@ -229,12 +231,12 @@ body {
   font-size: 3.5rem;
   font-weight: 700;
   line-height: 1.1;
-  color: var(--text-light);
+  color: black;
   margin-bottom: 2rem;
 }
 
 .hero-description {
-  color: var(--text-gray);
+  color: black;
   font-size: 1.2rem;
   max-width: 600px;
   margin-bottom: 2rem;
@@ -242,9 +244,9 @@ body {
 }
 
 .cta-button {
-  background-color: transparent;
+  background-color: #441752;
   color: var(--text-light);
-  border: 2px solid var(--accent);
+  border: 2px solid black;
   padding: 0.75rem 2rem;
   font-size: 1rem;
   font-weight: 500;
@@ -296,22 +298,29 @@ body {
 .circle {
   position: absolute;
   border-radius: 50%;
-  border: 1px solid var(--primary-light);
-  opacity: 0.1;
+  border: 2px solid var(--primary-light);
+  opacity: 0.6;
 }
 
 .circle-1 {
   width: 800px;
   height: 800px;
   top: -200px;
-  right: -200px;
+  right: -453px;
 }
 
 .circle-2 {
   width: 600px;
   height: 600px;
-  bottom: -100px;
-  left: -100px;
+  bottom: -200px;
+  right: -200px;
+}
+
+.circle-3 {
+  width: 800px;
+  height: 800px;
+  bottom: -450px;
+  right: 0px;
 }
 
 @media (max-width: 768px) {

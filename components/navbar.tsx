@@ -3,6 +3,7 @@
 import { useState, JSX } from 'react';
 import Link from 'next/link';
 import styles from './navbar.module.css';
+import Image from 'next/image';
 
 const Navbar = (): JSX.Element => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -13,9 +14,9 @@ const Navbar = (): JSX.Element => {
 
   return (
     <nav className={styles.navbar}>
-      <Link href="/" className={styles.logo}>
-        <span className={styles.logoSymbol}>{"{"}</span>PEARL LABS
-      </Link>
+    <Link href="/">
+      <Image src="/pearl.png" width={75} height={75} alt='PEARL Logo' />
+    </Link>
       
       <div className={`${styles.navLinks} ${isMenuOpen ? styles.active : ''}`}>
         <Link href="/about" className={styles.navLink}>About</Link>

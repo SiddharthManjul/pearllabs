@@ -1,6 +1,5 @@
 import { Space_Grotesk } from "next/font/google";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const spaceGrotesk = Space_Grotesk({subsets: ["latin"] });
 import './globals.css';
 import Navbar from '../components/navbar';
